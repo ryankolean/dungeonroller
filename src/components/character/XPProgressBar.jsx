@@ -10,7 +10,7 @@ export default function XPProgressBar({ character, showDetailed = false }) {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Badge className="bg-purple-600/30 text-purple-200 border-purple-500/50 text-lg">
+          <Badge className="bg-amber-600/30 text-amber-200 border-amber-500/50 text-lg">
             Level {character.level}
           </Badge>
           {showDetailed && (
@@ -26,12 +26,12 @@ export default function XPProgressBar({ character, showDetailed = false }) {
         )}
       </div>
       
-      <div className="w-full bg-gray-700/50 rounded-full h-4 border border-purple-500/30 overflow-hidden">
+      <div className="w-full bg-gray-700/50 rounded-full h-4 border border-amber-500/30 overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 relative"
+          className="h-full bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 relative"
         >
           <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
         </motion.div>

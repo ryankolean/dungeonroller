@@ -7,8 +7,8 @@ const DICE_TYPES = [
   { type: "d8", sides: 8, color: "from-yellow-500 to-yellow-600" },
   { type: "d10", sides: 10, color: "from-green-500 to-green-600" },
   { type: "d12", sides: 12, color: "from-blue-500 to-blue-600" },
-  { type: "d20", sides: 20, color: "from-purple-500 to-purple-600" },
-  { type: "d100", sides: 100, color: "from-pink-500 to-pink-600" }
+  { type: "d20", sides: 20, color: "from-emerald-500 to-emerald-600" },
+  { type: "d100", sides: 100, color: "from-orange-500 to-orange-600" }
 ];
 
 export default function DiceSelector({ selectedDice, onSelectDice }) {

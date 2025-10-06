@@ -112,7 +112,7 @@ export default function EquipmentStep({ character, setCharacter }) {
             onClick={() => setSelectedCategory(category)}
             className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
               selectedCategory === category
-                ? 'bg-purple-600 text-white'
+                ? 'bg-amber-600 text-white'
                 : 'bg-white/10 text-white/70 hover:bg-white/20'
             }`}
           >
@@ -134,7 +134,7 @@ export default function EquipmentStep({ character, setCharacter }) {
               transition={{ delay: index * 0.1 }}
               className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                 isSelected
-                  ? 'bg-purple-600/20 border-purple-500/50'
+                  ? 'bg-amber-600/20 border-amber-500/50'
                   : 'bg-white/10 border-white/20 hover:bg-white/15'
               }`}
               onClick={() => toggleEquipment(item)}
@@ -148,7 +148,7 @@ export default function EquipmentStep({ character, setCharacter }) {
                     </Badge>
                   )}
                   {isSelected && (
-                    <Badge className="bg-purple-600/20 text-purple-400 border-purple-500/50 text-xs">
+                    <Badge className="bg-amber-600/20 text-amber-400 border-amber-500/50 text-xs">
                       Selected
                     </Badge>
                   )}
@@ -162,7 +162,7 @@ export default function EquipmentStep({ character, setCharacter }) {
                   {selectedCategory.slice(0, -1)}
                 </span>
                 <div className="w-6 h-6 rounded border-2 border-white/30 flex items-center justify-center">
-                  {isSelected && <span className="text-purple-400">✓</span>}
+                  {isSelected && <span className="text-amber-400">✓</span>}
                 </div>
               </div>
             </motion.div>
@@ -187,7 +187,7 @@ export default function EquipmentStep({ character, setCharacter }) {
         <h4 className="text-lg font-medium text-white mb-3">Selected Equipment ({(character.equipment || []).length} items)</h4>
         <div className="flex flex-wrap gap-2">
           {(character.equipment || []).map((item, index) => (
-            <Badge key={index} className="bg-purple-600/20 text-purple-300 border-purple-500/50">
+            <Badge key={index} className="bg-amber-600/20 text-amber-300 border-amber-500/50">
               {item}
             </Badge>
           ))}

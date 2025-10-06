@@ -40,7 +40,7 @@ export default function CombatActionMenu({
                   ? 'bg-gray-700/50 text-gray-500 cursor-not-allowed'
                   : action.type === 'special'
                   ? 'bg-yellow-600/80 hover:bg-yellow-500 text-white'
-                  : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white'
+                  : 'bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white'
               }`}
               title={action.description}
             >

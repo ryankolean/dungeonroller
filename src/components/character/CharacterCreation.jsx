@@ -122,7 +122,7 @@ export default function CharacterCreation({ onCreateCharacter, onCancel }) {
         </div>
         <div className="w-full bg-white/20 rounded-full h-2">
           <div 
-            className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500"
+            className="bg-gradient-to-r from-amber-500 to-orange-500 h-2 rounded-full transition-all duration-500"
             style={{ width: `${((currentStep + 1) / STEPS.length) * 100}%` }}
           />
         </div>

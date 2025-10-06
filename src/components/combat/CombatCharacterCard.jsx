@@ -28,7 +28,7 @@ export default function CombatCharacterCard({ character, currentHP, conditions =
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
-      className={`bg-gradient-to-br from-blue-900/30 to-purple-900/30 backdrop-blur-sm border-2 rounded-xl p-6 ${
+      className={`bg-gradient-to-br from-blue-900/30 to-amber-900/30 backdrop-blur-sm border-2 rounded-xl p-6 ${
         isActive ? 'border-green-500 shadow-lg shadow-green-500/50' : 'border-blue-500/50'
       }`}
     >
@@ -44,7 +44,7 @@ export default function CombatCharacterCard({ character, currentHP, conditions =
             <Badge className="bg-red-600/30 text-red-200 border-red-500/50">
               {character.class}
             </Badge>
-            <Badge className="bg-purple-600/30 text-purple-200 border-purple-500/50">
+            <Badge className="bg-amber-600/30 text-amber-200 border-amber-500/50">
               Lvl {character.level}
             </Badge>
           </div>

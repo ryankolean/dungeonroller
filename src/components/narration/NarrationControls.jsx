@@ -145,7 +145,7 @@ export default function NarrationControls({ onClose }) {
                 speechSynthesis.speak(utterance);
               }
             }}
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+            className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-pink-700 text-white"
           >
             Test Voice
           </Button>

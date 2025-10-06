@@ -2,8 +2,8 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import NavigationBar from './components/layout/NavigationBar';
-import Footer from './components/layout/Footer';
+import NavigationBar from '@/components/layout/NavigationBar';
+import Footer from '@/components/layout/Footer';
 
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();

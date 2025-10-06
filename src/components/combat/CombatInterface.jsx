@@ -372,7 +372,7 @@ export default function CombatInterface({ character, enemies, onCombatEnd }) {
             <Badge className={combatState.bonusActionUsed ? 'bg-gray-600/50' : 'bg-yellow-600/50'}>
               Bonus Action {combatState.bonusActionUsed ? '✓' : '○'}
             </Badge>
-            <Badge className={combatState.reactionUsed ? 'bg-gray-600/50' : 'bg-purple-600/50'}>
+            <Badge className={combatState.reactionUsed ? 'bg-gray-600/50' : 'bg-blue-600/50'}>
               Reaction {combatState.reactionUsed ? '✓' : '○'}
             </Badge>
             <Badge className='bg-blue-600/50'>

@@ -70,7 +70,7 @@ export default function NarrationButton({
                 className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-bold transition-all duration-300 shadow-2xl ${
                   isNarrating
                     ? "bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
-                    : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                    : "bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-pink-700"
                 } ${!textToNarrate?.trim() && typeof textToNarrate !== 'function' ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <span className="text-2xl">

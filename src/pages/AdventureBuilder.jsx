@@ -126,7 +126,7 @@ export default function AdventureBuilderPage() {
           </div>
           <div className="w-full bg-amber-100/20 rounded-full h-2">
             <div 
-              className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500"
+              className="bg-gradient-to-r from-amber-500 to-orange-500 h-2 rounded-full transition-all duration-500"
               style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
             />
           </div>
@@ -189,7 +189,7 @@ export default function AdventureBuilderPage() {
                         key={tag}
                         className={`cursor-pointer transition-all ${
                           adventure.tags.includes(tag)
-                            ? 'bg-purple-600/80 text-white border-purple-600'
+                            ? 'bg-amber-600/80 text-white border-amber-600'
                             : 'bg-amber-800/20 text-amber-900 border-amber-800/40 hover:bg-amber-800/30'
                         }`}
                         onClick={() => handleTagToggle(tag)}
@@ -343,7 +343,7 @@ export default function AdventureBuilderPage() {
                     <h3 className="font-bold text-amber-900 mb-2">Tags</h3>
                     <div className="flex flex-wrap gap-2">
                       {adventure.tags.map(tag => (
-                        <Badge key={tag} className="bg-purple-600/20 text-purple-900">
+                        <Badge key={tag} className="bg-amber-600/20 text-amber-900">
                           {tag}
                         </Badge>
                       ))}

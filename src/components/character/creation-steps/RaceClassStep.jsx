@@ -114,7 +114,7 @@ export default function RaceClassStep({ character, setCharacter }) {
               onClick={() => setCharacter(prev => ({ ...prev, race: race.name }))}
               className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                 character.race === race.name
-                  ? 'bg-purple-600/20 border-purple-500/50 transform scale-105'
+                  ? 'bg-amber-600/20 border-amber-500/50 transform scale-105'
                   : 'bg-white/10 border-white/20 hover:bg-white/15 hover:scale-102'
               }`}
               whileHover={{ y: -2 }}
@@ -167,7 +167,7 @@ export default function RaceClassStep({ character, setCharacter }) {
               onClick={() => setCharacter(prev => ({ ...prev, class: cls.name }))}
               className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                 character.class === cls.name
-                  ? 'bg-purple-600/20 border-purple-500/50 transform scale-105'
+                  ? 'bg-amber-600/20 border-amber-500/50 transform scale-105'
                   : 'bg-white/10 border-white/20 hover:bg-white/15 hover:scale-102'
               }`}
               whileHover={{ y: -2 }}
@@ -206,7 +206,7 @@ export default function RaceClassStep({ character, setCharacter }) {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-purple-600/20 border border-purple-500/40 rounded-lg p-4"
+          className="bg-amber-600/20 border border-amber-500/40 rounded-lg p-4"
         >
           <h4 className="text-white font-medium mb-2">Your Character</h4>
           <div className="flex items-center gap-4">

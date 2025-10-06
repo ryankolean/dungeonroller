@@ -68,7 +68,7 @@ const CharacterCard = ({ character, status, hasAdventure }) => {
           HP: {character.hit_points}/{character.max_hit_points}
         </Badge>
         {character.experience_points > 0 && (
-          <Badge className="bg-purple-600/20 text-purple-300 border-purple-500/50 text-sm">
+          <Badge className="bg-amber-600/20 text-amber-300 border-amber-500/50 text-sm">
             {character.experience_points} XP
           </Badge>
         )}

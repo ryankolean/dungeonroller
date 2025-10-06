@@ -25,7 +25,7 @@ export default function CombatLog({ messages }) {
       case 'fumble':
         return 'text-red-400 font-bold border-l-4 border-red-500 pl-3';
       case 'defeat':
-        return 'text-purple-300 font-bold border-l-4 border-purple-500 pl-3';
+        return 'text-amber-300 font-bold border-l-4 border-amber-500 pl-3';
       case 'action':
         return 'text-blue-300 border-l-4 border-blue-500 pl-3';
       case 'enemy-action':

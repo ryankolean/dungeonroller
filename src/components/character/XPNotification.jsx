@@ -19,7 +19,7 @@ export default function XPNotification({ xpGained, reason, onComplete }) {
         exit={{ opacity: 0, y: 50, scale: 0.8 }}
         className="fixed top-24 left-1/2 -translate-x-1/2 z-50"
       >
-        <div className="bg-gradient-to-r from-purple-600 to-pink-600 border-2 border-yellow-400 rounded-xl p-4 shadow-2xl flex items-center gap-3 min-w-[300px]">
+        <div className="bg-gradient-to-r from-amber-600 to-orange-600 border-2 border-yellow-400 rounded-xl p-4 shadow-2xl flex items-center gap-3 min-w-[300px]">
           <motion.div
             animate={{ rotate: [0, 360] }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}

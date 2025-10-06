@@ -35,7 +35,7 @@ export default function BackgroundStep({ character, setCharacter }) {
       className="space-y-6"
     >
       <div className="text-center mb-8">
-        <BookOpen className="w-16 h-16 text-purple-400 mx-auto mb-4" />
+        <BookOpen className="w-16 h-16 text-amber-400 mx-auto mb-4" />
         <h3 className="text-2xl font-bold text-white mb-2">Tell your character's story</h3>
         <p className="text-white/70">Create a rich background that explains how your character became an adventurer.</p>
       </div>

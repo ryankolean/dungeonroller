@@ -42,7 +42,7 @@ export default function NameStep({ character, setCharacter }) {
       className="space-y-6"
     >
       <div className="text-center mb-8">
-        <User className="w-16 h-16 text-purple-400 mx-auto mb-4" />
+        <User className="w-16 h-16 text-amber-400 mx-auto mb-4" />
         <h3 className="text-2xl font-bold text-white mb-2">What is your character's name?</h3>
         <p className="text-white/70">Choose a name that will echo through legend, or let fate decide.</p>
       </div>

@@ -84,7 +84,7 @@ export default function AbilityScoresStep({ character, setCharacter }) {
             <Button
               onClick={() => rollAbilityScore(ability.key)}
               disabled={rollingAbility === ability.key}
-              className="w-full bg-purple-600 hover:bg-purple-700"
+              className="w-full bg-amber-600 hover:bg-amber-700"
             >
               {rollingAbility === ability.key ? "Rolling..." : "Roll 4d6"}
             </Button>

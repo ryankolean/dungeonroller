@@ -63,7 +63,7 @@ export default function RollHistory({ rollHistory, characters, selectedCharacter
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <Badge className="bg-purple-600/20 text-purple-300 border-purple-500/50 text-xs">
+                    <Badge className="bg-amber-600/20 text-amber-300 border-amber-500/50 text-xs">
                       {roll.dice_type.toUpperCase()}
                     </Badge>
                     {roll.is_critical && (

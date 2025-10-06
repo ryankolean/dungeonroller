@@ -92,7 +92,7 @@ export default function CombatEnemyCard({ enemy, conditions = [], onTarget, isTa
           <div className="text-xs text-white/60 mb-2">Conditions:</div>
           <div className="flex flex-wrap gap-2">
             {conditions.map((condition, i) => (
-              <Badge key={i} className="bg-purple-600/30 text-purple-200 border-purple-500/50 text-xs">
+              <Badge key={i} className="bg-amber-600/30 text-amber-200 border-amber-500/50 text-xs">
                 {condition}
               </Badge>
             ))}

@@ -30,7 +30,7 @@ export default function SummaryStep({ character }) {
           className="bg-white/10 rounded-lg p-6 border border-white/20"
         >
           <div className="flex items-center gap-3 mb-4">
-            <User className="w-6 h-6 text-purple-400" />
+            <User className="w-6 h-6 text-amber-400" />
             <h4 className="text-xl font-bold text-white">Character Identity</h4>
           </div>
           <div className="text-center">
@@ -57,7 +57,7 @@ export default function SummaryStep({ character }) {
           className="bg-white/10 rounded-lg p-6 border border-white/20"
         >
           <div className="flex items-center gap-3 mb-4">
-            <Zap className="w-6 h-6 text-purple-400" />
+            <Zap className="w-6 h-6 text-amber-400" />
             <h4 className="text-xl font-bold text-white">Ability Scores</h4>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -87,7 +87,7 @@ export default function SummaryStep({ character }) {
             className="bg-white/10 rounded-lg p-6 border border-white/20"
           >
             <div className="flex items-center gap-3 mb-4">
-              <BookOpen className="w-6 h-6 text-purple-400" />
+              <BookOpen className="w-6 h-6 text-amber-400" />
               <h4 className="text-xl font-bold text-white">Background</h4>
             </div>
             <p className="text-white/80 leading-relaxed whitespace-pre-line">
@@ -105,7 +105,7 @@ export default function SummaryStep({ character }) {
             className="bg-white/10 rounded-lg p-6 border border-white/20"
           >
             <div className="flex items-center gap-3 mb-4">
-              <Shield className="w-6 h-6 text-purple-400" />
+              <Shield className="w-6 h-6 text-amber-400" />
               <h4 className="text-xl font-bold text-white">Starting Equipment</h4>
             </div>
             <div className="flex flex-wrap gap-2">

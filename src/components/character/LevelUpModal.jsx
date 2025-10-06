@@ -54,7 +54,7 @@ export default function LevelUpModal({ character, rewards, onClose, onAllocatePo
           initial={{ scale: 0.9, y: 20 }}
           animate={{ scale: 1, y: 0 }}
           exit={{ scale: 0.9, y: 20 }}
-          className="bg-gradient-to-br from-purple-900/90 to-pink-900/90 border-4 border-yellow-500 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+          className="bg-gradient-to-br from-amber-900/90 to-pink-900/90 border-4 border-yellow-500 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
         >
           {/* Header */}
           <div className="text-center mb-8">

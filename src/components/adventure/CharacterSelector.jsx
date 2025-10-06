@@ -23,7 +23,7 @@ export default function CharacterSelector({ characters, selectedCharacter, onSel
             onClick={() => onSelectCharacter(character)}
             className={`w-full p-4 rounded-xl border transition-all duration-300 text-left ${
               selectedCharacter?.id === character.id
-                ? "bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/50"
+                ? "bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-amber-500/50"
                 : "bg-white/5 border-white/10 hover:bg-white/10"
             }`}
           >
