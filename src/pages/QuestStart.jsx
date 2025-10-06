@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Character } from "@/api/entities";
 import { Adventure } from "@/api/entities";
-import { Node } from "@/api/entities";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
@@ -46,12 +45,10 @@ export default function QuestStartPage() {
   const handleStartNewQuest = async () => {
     if (!character) return;
     setLoading(true);
-    
+
     try {
-      // This logic is moved from the original Adventure page
-      const rootNode = await Node.create({
-          adventure_id: 'temp',
-          parent_id: null,
+      const rootNode = {
+          id: 'start',
           depth: 0,
           content: {
               scene_description: `The story of ${character.name}, the ${character.race} ${character.class}, is about to begin. An old map, a mysterious whisper, or a sudden danger pulls them from a life of obscurity into the annals of legend. The path ahead is shrouded in mystery.`,
@@ -59,17 +56,16 @@ export default function QuestStartPage() {
               details: "This is the starting point of the adventure."
           },
           choices: []
-      });
+      };
 
-      const seed = Math.random().toString(36).substring(2);
-      const newAdventure = await Adventure.create({ 
-          character_id: character.id, 
-          seed: seed, 
-          current_node_id: rootNode.id,
-          path_log: [rootNode.id]
+      const seed = `${character.name} the ${character.race} ${character.class} embarks on an epic adventure`;
+      const newAdventure = await Adventure.create({
+          character_id: character.id,
+          seed: seed,
+          path_log: [rootNode],
+          nodes_cache: [],
+          status: 'active'
       });
-
-      await Node.update(rootNode.id, { adventure_id: newAdventure.id });
 
       navigate(createPageUrl(`Adventure?characterId=${character.id}`));
     } catch (error) {
@@ -86,8 +82,6 @@ export default function QuestStartPage() {
     if (!adventure || !window.confirm("Are you sure you want to abandon this quest? All progress will be lost permanently.")) return;
     setLoading(true);
     try {
-        // A more robust solution would be to delete all nodes associated with the adventure in a batch.
-        // For now, we just delete the adventure record itself. The nodes become orphaned but won't be accessed.
         await Adventure.delete(adventure.id);
         setAdventure(null);
     } catch (error) {

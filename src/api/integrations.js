@@ -1,26 +1,58 @@
-import { base44 } from './base44Client';
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+async function callEdgeFunction(functionName, data) {
+  const response = await fetch(`${SUPABASE_URL}/functions/v1/${functionName}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+    },
+    body: JSON.stringify(data)
+  });
 
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Edge function error: ${error}`);
+  }
 
+  return response.json();
+}
 
-export const Core = base44.integrations.Core;
+export const InvokeLLM = async (params) => {
+  return callEdgeFunction('invoke-llm', params);
+};
 
-export const InvokeLLM = base44.integrations.Core.InvokeLLM;
+export const SendEmail = async (params) => {
+  return callEdgeFunction('send-email', params);
+};
 
-export const SendEmail = base44.integrations.Core.SendEmail;
+export const UploadFile = async (params) => {
+  throw new Error('UploadFile not yet implemented. Use Supabase Storage directly.');
+};
 
-export const UploadFile = base44.integrations.Core.UploadFile;
+export const GenerateImage = async (params) => {
+  return callEdgeFunction('generate-image', params);
+};
 
-export const GenerateImage = base44.integrations.Core.GenerateImage;
+export const ExtractDataFromUploadedFile = async (params) => {
+  throw new Error('ExtractDataFromUploadedFile not yet implemented.');
+};
 
-export const ExtractDataFromUploadedFile = base44.integrations.Core.ExtractDataFromUploadedFile;
+export const CreateFileSignedUrl = async (params) => {
+  throw new Error('CreateFileSignedUrl not yet implemented. Use Supabase Storage directly.');
+};
 
-export const CreateFileSignedUrl = base44.integrations.Core.CreateFileSignedUrl;
+export const UploadPrivateFile = async (params) => {
+  throw new Error('UploadPrivateFile not yet implemented. Use Supabase Storage directly.');
+};
 
-export const UploadPrivateFile = base44.integrations.Core.UploadPrivateFile;
-
-
-
-
-
-
+export const Core = {
+  InvokeLLM,
+  SendEmail,
+  UploadFile,
+  GenerateImage,
+  ExtractDataFromUploadedFile,
+  CreateFileSignedUrl,
+  UploadPrivateFile
+};

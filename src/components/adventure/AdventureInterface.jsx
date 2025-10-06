@@ -3,7 +3,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Adventure } from "@/api/entities";
 import { Character } from "@/api/entities";
-import { Node } from "@/api/entities";
 import { InvokeLLM } from "@/api/integrations";
 
 import ActionChoices from "./ActionChoices";
@@ -93,9 +92,8 @@ export default function AdventureInterface({ character, adventure, onAdventureUp
     const generateAndLinkNodes = useCallback(async (parentNode) => {
         setIsLoading(true);
 
-        const history = (await Node.list())
-            .filter(n => adventure.path_log.includes(n.id))
-            .map(n => ({ depth: n.depth, description: n.content.scene_description }));
+        const history = (adventure.path_log || [])
+            .map((node, index) => ({ depth: index, description: node.content?.scene_description || '' }));
 
         const prompt = `
             You are a master D&D Dungeon Master generating a procedural adventure based on a decision tree.
@@ -119,26 +117,21 @@ export default function AdventureInterface({ character, adventure, onAdventureUp
         try {
             const response = await InvokeLLM({ prompt, response_json_schema: NODE_GENERATION_SCHEMA });
 
-            // Create new node records in the database
-            const newNodeData = response.nodes.map(nodeContent => ({
-                adventure_id: adventure.id,
-                parent_id: parentNode.id,
+            const newNodes = response.nodes.map((nodeContent, index) => ({
+                id: `${adventure.id}_${Date.now()}_${index}`,
                 depth: parentNode.depth + 1,
                 content: nodeContent,
-                choices: [],
+                choices: []
             }));
-            const createdNodes = await Node.bulkCreate(newNodeData);
 
-            // Map choices to the newly created node IDs
             const finalChoices = response.choices.map(choice => ({
                 ...choice,
-                child_node_id: createdNodes[choice.child_node_index].id
+                child_node_id: newNodes[choice.child_node_index].id
             }));
 
-            // Update the parent node with its new choices
-            await Node.update(parentNode.id, { choices: finalChoices });
+            const updatedParent = { ...parentNode, choices: finalChoices };
 
-            return { ...parentNode, choices: finalChoices };
+            return { updatedParent, newNodes };
         } catch (error) {
             console.error("Error generating next nodes:", error);
             // Re-throw or handle more robustly if needed, but for now, reset loading and return original node
@@ -148,23 +141,42 @@ export default function AdventureInterface({ character, adventure, onAdventureUp
     }, [adventure, character]);
 
     const loadNode = useCallback(async () => {
-        if (!adventure || !adventure.current_node_id) return;
+        if (!adventure) return;
         setIsLoading(true);
 
         try {
-            let node = await Node.get(adventure.current_node_id);
+            const pathLog = adventure.path_log || [];
+            let currentIndex = pathLog.length - 1;
+            let node = pathLog[currentIndex];
 
-            if (!node.choices || node.choices.length === 0) {
-                node = await generateAndLinkNodes(node);
+            if (!node) {
+                node = {
+                    id: 'start',
+                    depth: 0,
+                    content: {
+                        scene_description: adventure.seed || 'Your adventure begins...',
+                        encounter_type: 'exploration',
+                        details: 'The journey starts here.'
+                    },
+                    choices: []
+                };
+                currentIndex = 0;
             }
 
-            const pathNodes = (await Node.list())
-                .filter(n => adventure.path_log.includes(n.id));
-            const sortedLog = adventure.path_log
-                .map(id => pathNodes.find(n => n.id === id))
-                .filter(Boolean); // Ensure only existing nodes are mapped
-            setLogEntries(sortedLog.map(n => n.content.scene_description));
+            if (!node.choices || node.choices.length === 0) {
+                const { updatedParent, newNodes } = await generateAndLinkNodes(node);
+                node = updatedParent;
 
+                const updatedPathLog = [...pathLog];
+                updatedPathLog[currentIndex] = node;
+
+                await onAdventureUpdate({
+                    path_log: updatedPathLog,
+                    nodes_cache: [...(adventure.nodes_cache || []), ...newNodes]
+                });
+            }
+
+            setLogEntries(pathLog.map(n => n.content?.scene_description || ''));
             setCurrentNode(node);
         } catch (error) {
             console.error("Error loading or generating node:", error);
@@ -183,8 +195,8 @@ export default function AdventureInterface({ character, adventure, onAdventureUp
     const handleChoice = async (choice) => {
         if (isLoading || inCombat) return;
 
-        // Check if choice leads to combat
-        const targetNode = await Node.get(choice.child_node_id);
+        const nodesCache = adventure.nodes_cache || [];
+        const targetNode = nodesCache.find(n => n.id === choice.child_node_id);
         
         if (targetNode.content.encounter_type === 'combat') {
           // Generate enemies and enter combat
@@ -197,30 +209,25 @@ export default function AdventureInterface({ character, adventure, onAdventureUp
           setCombatEnemies(enemies);
           setInCombat(true);
           
-          // Update adventure to the combat node
-          const newPathLog = [...(adventure.path_log || []), choice.child_node_id];
+          const newPathLog = [...(adventure.path_log || []), targetNode];
           await onAdventureUpdate({
-            current_node_id: choice.child_node_id,
-            path_log: newPathLog,
+            path_log: newPathLog
           });
           
           return;
         }
 
-        // Non-combat choice handling
-        // Simple HP check for lethality on risky choices
         if (choice.type === 'risky' && character.hit_points < 5) {
             const deathChance = Math.random();
-            if (deathChance < 0.5) { // 50% chance of death on risky move with low HP
+            if (deathChance < 0.5) {
                 setIsDead(true);
                 return;
             }
         }
 
-        const newPathLog = [...(adventure.path_log || []), choice.child_node_id];
+        const newPathLog = [...(adventure.path_log || []), targetNode];
         await onAdventureUpdate({
-            current_node_id: choice.child_node_id,
-            path_log: newPathLog,
+            path_log: newPathLog
         });
         // The adventure prop will update, triggering the useEffect/loadNode flow
     };
